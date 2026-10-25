@@ -37,6 +37,9 @@ GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', '')
 NVIDIA_API_KEY = os.environ.get('NVIDIA_API_KEY', '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')
 COINGECKO_API_URL = 'https://api.coingecko.com/api/v3'
 
+# NOTE: NVIDIA NIM API - Models endpoint works (85 models), but chat completions return 404
+# API format may have changed. Using Groq/Gemini as primary providers.
+
 # Kronos Model Config
 KRONOS_AVAILABLE_MODELS = {
     'kronos-mini': {'model': 'NeoQuasar/Kronos-mini', 'tokenizer': 'NeoQuasar/Kronos-Tokenizer-2k', 'context': 2048},
