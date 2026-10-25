@@ -34,6 +34,7 @@ CORS(app)
 # Configuration
 GROQ_API_KEY = os.environ.get('GROQ_API_KEY', '')
 GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', '')
+NVIDIA_API_KEY = os.environ.get('NVIDIA_API_KEY', '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')
 COINGECKO_API_URL = 'https://api.coingecko.com/api/v3'
 
 # Kronos Model Config
@@ -369,6 +370,40 @@ Provide:
 4. Risk assessment (Low/Medium/High)
 5. Short summary (2-3 sentences)
 """
+            
+            if NVIDIA_API_KEY:
+                try:
+                    nvidia_response = requests.post(
+                        'https://integrate.api.nvidia.com/v1/chat/completions',
+                        headers={
+                            'Authorization': f'Bearer {NVIDIA_API_KEY}',
+                            'Content-Type': 'application/json'
+                        },
+                        json={
+                            'model': 'meta/llama3-70b-instruct',
+                            'messages': [{'role': 'user', 'content': prompt}],
+                            'max_tokens': 500,
+                            'temperature': 0.7
+                        },
+                        timeout=30
+                    )
+                    
+                    if nvidia_response.status_code == 200:
+                        result = nvidia_response.json()
+                        analysis = result['choices'][0]['message']['content']
+                        
+                        return jsonify({
+                            'success': True,
+                            'analysis': analysis,
+                            'model': 'NVIDIA NIM/Llama3',
+                            'coin_data': {
+                                'name': coin_data.get('name'),
+                                'price': coin_data.get('market_data', {}).get('current_price', {}).get('usd'),
+                                'change_24h': coin_data.get('market_data', {}).get('price_change_percentage_24h')
+                            }
+                        })
+                except Exception as e:
+                    print(f"NVIDIA failed: {e}")
             
             if GROQ_API_KEY:
                 try:
