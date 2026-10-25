@@ -3,6 +3,11 @@
 // API Configuration
 const API_BASE = 'http://localhost:7070';
 
+// Check if setup is complete, redirect to setup if not
+if (!localStorage.getItem('nexus-config')) {
+    window.location.href = '/setup.html';
+}
+
 // Application State
 const state = {
     currentPage: 'dashboard',

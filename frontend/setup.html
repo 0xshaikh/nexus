@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS — Setup Wizard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+    <!-- Setup Wizard Container -->
+    <div class="setup-wizard">
+        <!-- Header -->
+        <div class="setup-header">
+            <div class="setup-logo">
+                <img src="icon.svg" alt="NEXUS" width="60" height="60">
+                <h1>NEXUS</h1>
+            </div>
+            <p>Trading Intelligence Platform Setup</p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="setup-progress">
+            <div class="progress-step active" data-step="1">
+                <div class="step-number">1</div>
+                <div class="step-label">AI Models</div>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="2">
+                <div class="step-number">2</div>
+                <div class="step-label">Trading API</div>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="3">
+                <div class="step-number">3</div>
+                <div class="step-label">AI Team</div>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="4">
+                <div class="step-number">4</div>
+                <div class="step-label">Complete</div>
+            </div>
+        </div>
+
+        <!-- Step 1: AI Models Configuration -->
+        <div class="setup-step active" id="step-1">
+            <div class="step-content">
+                <h2>🤖 Configure AI Models</h2>
+                <p>Add your API keys to enable AI-powered trading. Choose from 3+ providers for redundancy.</p>
+
+                <div class="ai-providers-grid">
+                    <!-- NVIDIA NIM -->
+                    <div class="ai-provider-card" data-provider="nvidia">
+                        <div class="provider-header">
+                            <img src="assets/nvidia.png" alt="NVIDIA" class="provider-logo">
+                            <div>
+                                <h3>NVIDIA NIM</h3>
+                                <span class="provider-badges">
+                                    <span class="badge badge-models">132 Models</span>
+                                    <span class="badge badge-context">1M Context</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="provider-status">
+                            <span class="status-indicator inactive"></span>
+                            <span>Not Configured</span>
+                        </div>
+                        <div class="provider-config">
+                            <label>API Key</label>
+                            <div class="input-group">
+                                <input type="password" placeholder="nvapi-..." id="nvidia-key">
+                                <button class="btn-icon" onclick="togglePassword('nvidia-key')">👁</button>
+                            </div>
+                            <a href="https://build.nvidia.com/settings/api-keys" target="_blank" class="link-external">
+                                Get API Key →
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Google Gemini -->
+                    <div class="ai-provider-card" data-provider="gemini">
+                        <div class="provider-header">
+                            <img src="assets/google.png" alt="Google" class="provider-logo">
+                            <div>
+                                <h3>Google Gemini</h3>
+                                <span class="provider-badges">
+                                    <span class="badge badge-models">19 Models</span>
+                                    <span class="badge badge-context">1M Context</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="provider-status">
+                            <span class="status-indicator inactive"></span>
+                            <span>Not Configured</span>
+                        </div>
+                        <div class="provider-config">
+                            <label>API Key</label>
+                            <div class="input-group">
+                                <input type="password" placeholder="AIza..." id="gemini-key">
+                                <button class="btn-icon" onclick="togglePassword('gemini-key')">👁</button>
+                            </div>
+                            <a href="https://aistudio.google.com/app/apikey" target="_blank" class="link-external">
+                                Get API Key →
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Groq -->
+                    <div class="ai-provider-card" data-provider="groq">
+                        <div class="provider-header">
+                            <img src="assets/groq.png" alt="Groq" class="provider-logo">
+                            <div>
+                                <h3>Groq</h3>
+                                <span class="provider-badges">
+                                    <span class="badge badge-models">12 Models</span>
+                                    <span class="badge badge-speed">⚡ Ultra Fast</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="provider-status">
+                            <span class="status-indicator inactive"></span>
+                            <span>Not Configured</span>
+                        </div>
+                        <div class="provider-config">
+                            <label>API Key</label>
+                            <div class="input-group">
+                                <input type="password" placeholder="gsk_..." id="groq-key">
+                                <button class="btn-icon" onclick="togglePassword('groq-key')">👁</button>
+                            </div>
+                            <a href="https://console.groq.com/keys" target="_blank" class="link-external">
+                                Get API Key →
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Mistral AI -->
+                    <div class="ai-provider-card" data-provider="mistral">
+                        <div class="provider-header">
+                            <img src="assets/mistral.png" alt="Mistral" class="provider-logo">
+                            <div>
+                                <h3>Mistral AI</h3>
+                                <span class="provider-badges">
+                                    <span class="badge badge-models">15 Models</span>
+                                    <span class="badge badge-context">256K Context</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="provider-status">
+                            <span class="status-indicator inactive"></span>
+                            <span>Not Configured</span>
+                        </div>
+                        <div class="provider-config">
+                            <label>API Key</label>
+                            <div class="input-group">
+                                <input type="password" placeholder="..." id="mistral-key">
+                                <button class="btn-icon" onclick="togglePassword('mistral-key')">👁</button>
+                            </div>
+                            <a href="https://console.mistral.ai/api-keys" target="_blank" class="link-external">
+                                Get API Key →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="setup-actions">
+                    <button class="btn-secondary" onclick="skipSetup()">Skip for Now</button>
+                    <button class="btn-primary" onclick="saveAIKeys()">Save & Continue →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Trading API Configuration -->
+        <div class="setup-step" id="step-2">
+            <div class="step-content">
+                <h2>💰 Configure Trading API</h2>
+                <p>Connect your exchange to enable real trading. We support Binance, Coinbase, and more.</p>
+
+                <div class="exchange-selector">
+                    <div class="exchange-option selected" data-exchange="binance">
+                        <img src="assets/binance.png" alt="Binance" class="exchange-logo">
+                        <span>Binance</span>
+                    </div>
+                    <div class="exchange-option" data-exchange="coinbase">
+                        <img src="assets/coinbase.png" alt="Coinbase" class="exchange-logo">
+                        <span>Coinbase</span>
+                    </div>
+                    <div class="exchange-option" data-exchange="kucoin">
+                        <img src="assets/kucoin.png" alt="KuCoin" class="exchange-logo">
+                        <span>KuCoin</span>
+                    </div>
+                </div>
+
+                <div class="exchange-config">
+                    <div class="config-field">
+                        <label>Binance API Key</label>
+                        <div class="input-group">
+                            <input type="text" placeholder="Your Binance API key" id="binance-key">
+                            <button class="btn-icon" onclick="togglePassword('binance-key')">👁</button>
+                        </div>
+                        <p class="help-text">
+                            <a href="https://www.binance.com/en/my/settings/api-management" target="_blank">
+                                Create Binance API Key →
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="config-field">
+                        <label>Binance Secret Key</label>
+                        <div class="input-group">
+                            <input type="password" placeholder="Your Binance secret key" id="binance-secret">
+                            <button class="btn-icon" onclick="togglePassword('binance-secret')">👁</button>
+                        </div>
+                    </div>
+
+                    <div class="config-field">
+                        <label>Trading Mode</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="trading-mode" value="test" checked>
+                                <div>
+                                    <strong>Test Mode</strong>
+                                    <span>Practice with fake money</span>
+                                </div>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="trading-mode" value="live">
+                                <div>
+                                    <strong>Live Mode</strong>
+                                    <span>Real trading with real money</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="config-field">
+                        <label>Starting Balance</label>
+                        <div class="input-group">
+                            <span class="input-prefix">$</span>
+                            <input type="number" value="1000" id="starting-balance" min="100">
+                        </div>
+                    </div>
+
+                    <div class="config-field">
+                        <label>Risk Level</label>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="risk-level" value="conservative" checked>
+                                <div>
+                                    <strong>Conservative</strong>
+                                    <span>Low risk, steady growth</span>
+                                </div>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="risk-level" value="moderate">
+                                <div>
+                                    <strong>Moderate</strong>
+                                    <span>Balanced risk/reward</span>
+                                </div>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="risk-level" value="aggressive">
+                                <div>
+                                    <strong>Aggressive</strong>
+                                    <span>High risk, high reward</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="setup-actions">
+                    <button class="btn-secondary" onclick="goToStep(1)">← Back</button>
+                    <button class="btn-primary" onclick="saveTradingConfig()">Save & Continue →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: AI Team Configuration -->
+        <div class="setup-step" id="step-3">
+            <div class="step-content">
+                <h2>🤖 Configure AI Agent Team</h2>
+                <p>Choose which AI agents will work for you. Each agent has a specific role.</p>
+
+                <div class="ai-team-grid">
+                    <div class="ai-agent-card active" data-agent="analyst">
+                        <div class="agent-icon">📊</div>
+                        <h3>Market Analyst</h3>
+                        <p>Analyzes market trends and sentiment</p>
+                        <div class="agent-status">
+                            <span class="status-dot active"></span>
+                            Active
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="ai-agent-card active" data-agent="predictor">
+                        <div class="agent-icon">🔮</div>
+                        <h3>Price Predictor</h3>
+                        <p>Predicts price movements using AI</p>
+                        <div class="agent-status">
+                            <span class="status-dot active"></span>
+                            Active
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="ai-agent-card active" data-agent="risk">
+                        <div class="agent-icon">🛡️</div>
+                        <h3>Risk Manager</h3>
+                        <p>Manages risk and sets stop-loss</p>
+                        <div class="agent-status">
+                            <span class="status-dot active"></span>
+                            Active
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="ai-agent-card active" data-agent="executor">
+                        <div class="agent-icon">⚡</div>
+                        <h3>Trade Executor</h3>
+                        <p>Executes trades automatically</p>
+                        <div class="agent-status">
+                            <span class="status-dot active"></span>
+                            Active
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="ai-agent-card active" data-agent="news">
+                        <div class="agent-icon">📰</div>
+                        <h3>News Monitor</h3>
+                        <p>Monitors news and social media</p>
+                        <div class="agent-status">
+                            <span class="status-dot active"></span>
+                            Active
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="ai-agent-card" data-agent="copy">
+                        <div class="agent-icon">👥</div>
+                        <h3>Copy Trader</h3>
+                        <p>Copies successful traders</p>
+                        <div class="agent-status">
+                            <span class="status-dot inactive"></span>
+                            Inactive
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="agent-team-summary">
+                    <h4>Active AI Team: <span id="active-agents-count">5</span> agents</h4>
+                    <div class="team-power-meter">
+                        <div class="meter-fill" style="width: 83%"></div>
+                        <span>Team Power: 83%</span>
+                    </div>
+                </div>
+
+                <div class="setup-actions">
+                    <button class="btn-secondary" onclick="goToStep(2)">← Back</button>
+                    <button class="btn-primary" onclick="saveAITeam()">Save & Continue →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: Setup Complete -->
+        <div class="setup-step" id="step-4">
+            <div class="step-content complete-step">
+                <div class="success-animation">
+                    <svg width="120" height="120" viewBox="0 0 120 120">
+                        <circle cx="60" cy="60" r="50" fill="none" stroke="url(#gradient)" stroke-width="4"/>
+                        <path d="M35 60 L55 80 L85 40" fill="none" stroke="url(#gradient)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs>
+                            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#00f5ff"/>
+                                <stop offset="100%" style="stop-color:#00ff88"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <h2>Setup Complete! 🎉</h2>
+                <p>Your AI trading platform is ready. All systems configured successfully.</p>
+
+                <div class="setup-summary">
+                    <div class="summary-item">
+                        <span class="summary-icon">🤖</span>
+                        <div>
+                            <strong>AI Models</strong>
+                            <span id="summary-ai">5 providers configured</span>
+                        </div>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-icon">💰</span>
+                        <div>
+                            <strong>Exchange</strong>
+                            <span id="summary-exchange">Binance connected</span>
+                        </div>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-icon">🛡️</span>
+                        <div>
+                            <strong>AI Team</strong>
+                            <span id="summary-team">5 agents active</span>
+                        </div>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-icon">⚙️</span>
+                        <div>
+                            <strong>Risk Level</strong>
+                            <span id="summary-risk">Conservative</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-primary btn-large" onclick="startTrading()">
+                    🚀 Start Trading
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/setup.js"></script>
+</body>
+</html>
